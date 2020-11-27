@@ -6,7 +6,7 @@ const CryptoLinkContainer = ({ cryptos }) => {
     cryptos.map((crypto) => <CryptoLink crypto={crypto} />);
   ;
   return (
-    <div className="pokemonList">
+    <div>
       {renderLinks()}
     </div>
   );

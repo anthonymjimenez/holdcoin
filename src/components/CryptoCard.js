@@ -1,29 +1,28 @@
 import React, { useEffect, useState }  from 'react';
-import { showurl } from '../utils/utils'
-import {Redirect} from 'react-router'
+import { showurl, isoId } from '../utils/utils'
+
 function CryptoCard(props) {
-// take a prop isOwnedByUser 
-// if true then append the crypto to include info hold goal, stop limit etc
-// use bool to conditionally render 
+
 let [crypto, setCrypto] = useState({})
+// let [userData, setUserData] = {}
 let {location: {cryptoProps=null}} = props
-let id = (cryptoProps == null) ? props.location.pathname.split('/').slice(-1)[0] : cryptoProps.id
 
 useEffect(() => {
-    if(!cryptoProps) {
+    (!cryptoProps) ?
         (async () => {
+        let id = isoId(props.location.pathname)
         let resp = await fetch(`${showurl}${id}`)
         let data = await resp.json()
+        // need to make fetch to userinfo and append
         setCrypto(data[0])
         })()
-    }else{
+    : // make an IIFE and set user data 
         setCrypto(cryptoProps)
-    }
 },[])
 
   return (
     <> 
-    {console.log(crypto)}
+    {crypto.userData ? <h2>You own this crypto!</h2> : <h2>Are you ready to start holding?</h2> } 
    <img src={crypto?.logo_url} width='300' height='300'/>
    <h2>{crypto?.name}</h2>
     </>
