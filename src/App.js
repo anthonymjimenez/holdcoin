@@ -8,8 +8,13 @@ import Blockfolio from "./components/Blockfolio";
 import Nav from "./components/Nav";
 import { sampleUserData, url, appendUserInfo } from "./utils/utils";
 
+import LoginForm from "./components/LoginForm";
+import SignupForm from "./components/SignupForm";
+
 function App() {
   let [cryptoData, setCryptoData] = useState([]);
+  const [user, setUser] = useState({})
+  const [form, setForm] = useState("signup")
     
   useEffect(() => {
     (async () => {
@@ -22,13 +27,42 @@ function App() {
     })();
   }, []);
 
+  const handleLogin = (user) => {
+    setUser(user)
+  }
+
+  const handleFormSwitch = (input) => {
+    setForm(input)
+  }
+
+  // const handleAuthClick = () => {
+  //   const token = localStorage.getItem("token")
+  //   fetch(`http://localhost:3000/user_auth`, {
+  //     headers: {
+  //       "Authorization": `Bearer ${token}`
+  //     }
+  //   })
+  //   .then(resp => resp.json())
+  //   .then(data => console.log(data))
+  // }
+
+  const renderForm = () => {
+    switch(form){
+      case "login":
+        return <LoginForm handleLogin={handleLogin}/>
+      default:
+        return <SignupForm handleLogin={handleLogin}/>
+    }
+  }
+
 
 
   return (
     <Router>
       <div>
-        <Nav />
-        
+        <Nav handleFormSwitch={handleFormSwitch}/> 
+        {renderForm()}
+        {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
         {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
         <Switch>
