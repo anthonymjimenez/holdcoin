@@ -4,6 +4,7 @@ import CryptoLinkContainer from "./CryptoLinkContainer";
 import { NavLink } from "react-router-dom";
 
 function UserContainer({ cryptos }) {
+  
   const filterCryptos = (cryptos) =>
     cryptos.filter((cryptos) => cryptos.userData);
 
