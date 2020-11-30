@@ -29,6 +29,7 @@ function App() {
 
   const handleLogin = (user) => {
     setUser(user)
+    console.log(user)
   }
 
   const handleFormSwitch = (input) => {
@@ -54,8 +55,6 @@ function App() {
         return <SignupForm handleLogin={handleLogin}/>
     }
   }
-
-
 
   return (
     <Router>

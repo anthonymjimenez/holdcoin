@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 
 export default function SignupForm(props) {
+
   const [state, setState] = useState({
     name: "",
     age: null,
