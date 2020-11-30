@@ -22,13 +22,9 @@ function Blockfolio(props) {
   }; // need to add loading 
   return (
     <> 
-      {userData.length !== 0 && <h1>Time to make your first purchase</h1>}
+      {userData.length == 0 && <h1>Time to make your first purchase</h1>}
       {<CryptoLinkContainer cryptos={userData}/>}
-      <img
-        src="https://miro.medium.com/max/324/1*HI4kj-TPAQrfQkAdrw2KTA.png"
-        alt=""
-        srcset=""
-      />
+ 
     </>
   );
 }
