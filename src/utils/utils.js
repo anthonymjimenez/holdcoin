@@ -10,14 +10,12 @@ export const sampleUserData = [
     holdPrice: 20000,
     stopLimit: 10000,
     averageCost: 13400,
-    owned: true,
   },
   {
     symbol: "ETH",
     holdPrice: 1000,
     stopLimit: 400,
     averageCost: 466,
-    owned: true,
   },
 ];
 
