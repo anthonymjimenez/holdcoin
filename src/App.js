@@ -20,7 +20,6 @@ import {
 function App() {
   let [cryptoData, setCryptoData] = useState([]);
   const [user, setUser] = useState(null);
-  const [form, setForm] = useState("signup");
 
   useEffect(() => {
     (async () => {
@@ -33,7 +32,7 @@ function App() {
     })();
     const token = localStorage.getItem("token"); // set user with token if(token & user=dne) <- that means token was set and page has been reset, in that case use token to fetch user
     // use auth routes to restrict all routes before token is set, then use token to render user
-   
+  
     if (token) {
       fetch(`http://localhost:3000/api/v1/auto_login`, {
         headers: {
@@ -81,10 +80,6 @@ function App() {
         setUser(data.user);
       })
       .catch(console.error);
-  };
-
-  const handleFormSwitch = (input) => {
-    setForm(input);
   };
 
   const handleAuthClick = (token) => {

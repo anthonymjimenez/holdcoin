@@ -24,21 +24,21 @@ export const isoId = (prop) => prop.split("/").slice(-1)[0];
 export const appendUserInfo = (setCryptoData, user) => {
   setCryptoData((cryptoData) =>
     cryptoData.map((crypto) => {
-      let userData = user.find(({ symbol }) => symbol == crypto.symbol);
+      let userData = user.find(({ symbol }) => symbol === crypto.symbol);
       return userData ? { ...crypto, userData } : crypto;
     })
   );
 };
 
 
-export const getUserFromToken = token => {
-  if (token) {
-    try {
-      return JSON.parse(atob(token.split('.')[1]));
-    } catch (error) {
-      // ignore
-    }
-  }
+// export const getUserFromToken = token => {
+//   if (token) {
+//     try {
+//       return JSON.parse(atob(token.split('.')[1]));
+//     } catch (error) {
+//       // ignore
+//     }
+//   }
 
-  return null;
-};
+//   return null;
+// };

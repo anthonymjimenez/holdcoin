@@ -24,8 +24,8 @@ useEffect(() => {
     <> 
     {console.log(crypto)}
     {crypto.userData ? <h2>You own this crypto!</h2> : <h2>Are you ready to start holding?</h2> } 
-   <img src={crypto?.logo_url} width='300' height='300'/>
-   <h2>{crypto?.name}</h2>
+    <img src={crypto?.logo_url} width='300' height='300'/>
+    <h2>{crypto?.name}</h2>
     </>
   );
 }

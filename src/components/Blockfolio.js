@@ -9,7 +9,7 @@ function Blockfolio(props) {
   let [userData, setUserData] = useState(cryptoProps);
 
   useEffect(() => {
-   userData.length == 0 && (async () => {
+    userData.length === 0 && (async () => {
       Promise.all(sampleUserData.map(appendCryptoInfo)).then(setUserData);
       // fetch to user data
     })();
@@ -20,9 +20,10 @@ function Blockfolio(props) {
     let data = await resp.json();
     return { ...data[0], userData };
   }; // need to add loading 
+  
   return (
     <> 
-      {userData.length == 0 && <h1>Time to make your first purchase</h1>}
+      {userData.length === 0 && <h1>Time to make your first purchase</h1>}
       {<CryptoLinkContainer cryptos={userData}/>}
  
     </>

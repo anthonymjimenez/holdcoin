@@ -3,7 +3,7 @@ import CryptoLink from "../components/CryptoLink";
 
 const CryptoLinkContainer = ({ cryptos }) => {
   const renderLinks = () => 
-    cryptos.map((crypto) => <CryptoLink crypto={crypto} />);
+    cryptos.map((crypto, index) => <CryptoLink key={index} crypto={crypto} />);
   ;
   return (
     <div>
