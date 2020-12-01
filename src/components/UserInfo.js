@@ -8,4 +8,4 @@ function UserInfo() {
   );
 }
 
-export default Nav;
+export default UserInfo;
