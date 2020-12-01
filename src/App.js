@@ -14,8 +14,8 @@ import {
   getUserFromToken,
 } from "./utils/utils";
 
-import LoginForm from "./components/LoginForm";
-import SignupForm from "./components/SignupForm";
+// need to figure out auth routes and create a new component to house App.js, if the route to app.js only fires when
+// token is accepted then I can useEffect to grab userData and append to to the crypto 
 
 function App() {
   let [cryptoData, setCryptoData] = useState([]);
