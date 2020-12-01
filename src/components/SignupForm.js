@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 
-export default function SignupForm(props) {
+export default function SignupForm({handleSignUp}) {
   const [state, setState] = useState({
     name: "",
-    age: null,
+    age: 0,
     username: "",
     password: ""
   })
@@ -14,25 +14,7 @@ export default function SignupForm(props) {
 
   const handleSubmit = (e) => {
       e.preventDefault()
-      fetch(`http://localhost:3000/api/v1/users`, {
-          method: "POST",
-          headers: {
-              "Content-Type": "application/json",
-              "Accept": "application/json"
-          },
-          body: JSON.stringify({user: state})
-      })
-      .then(resp => resp.json())
-      .then(data => {
-          localStorage.setItem("token", data.jwt)
-          props.handleLogin(data.user)
-      })
-      setState({
-        name: "",
-        age: null,
-        username: "",
-        password: ""
-      })
+      handleSignUp(state)
   }
 
   // add to css

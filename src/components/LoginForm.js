@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 
-export default function LoginForm(props) {
+export default function LoginForm({handleLogIn}) {
     const [state, setState] = useState({username: "", password: ""})
 
     const handleChange = (e) => {
@@ -9,20 +9,7 @@ export default function LoginForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        fetch(`http://localhost:3000/api/v1/login`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify({user: state})
-        })
-        .then(r => r.json())
-        .then(data => {
-            localStorage.setItem("token", data.jwt)
-            props.handleLogin(data.user)
-        })
-        setState({username: "", password: ""})
+        handleLogIn(state)
     }
 
     // make css
