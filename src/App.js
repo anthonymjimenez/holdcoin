@@ -15,7 +15,7 @@ import {
 } from "./utils/utils";
 
 // need to figure out auth routes and create a new component to house App.js, if the route to app.js only fires when
-// token is accepted then I can useEffect to grab userData and append to to the crypto 
+// token is accepted then I can useEffect to grab userData and append to to the crypto
 
 function App() {
   let [cryptoData, setCryptoData] = useState([]);
@@ -31,7 +31,20 @@ function App() {
       appendUserInfo(setCryptoData, sampleUserData);
       console.log(cryptoData);
     })();
-    handleAuthClick(localStorage.getItem("token"));
+    const token = localStorage.getItem("token"); // set user with token if(token & user=dne) <- that means token was set and page has been reset, in that case use token to fetch user
+    // use auth routes to restrict all routes before token is set, then use token to render user
+   
+    if (token) {
+      fetch(`http://localhost:3000/api/v1/auto_login`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((resp) => resp.json())
+        .then((data) => {
+          console.log(data)
+        });
+    }
   }, []);
 
   const handleSignUp = (state) => {
@@ -76,7 +89,7 @@ function App() {
 
   const handleAuthClick = (token) => {
     if (!token) return console.log("sign up/in");
-    fetch(`http://localhost:3000/user_auth/`, {
+    fetch(`http://localhost:3000/api/v1/user_auth`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -98,13 +111,14 @@ function App() {
           <Route path="/cryptos/:id" component={CryptoCard} />
           <Route path="/blockfolio" component={Blockfolio} />
           <Route path="/">
-           { !user ?
-            <LandPage handleLogIn={handleLogIn} handleSignUp={handleSignUp} />
-            :
-            <>
-            <UserContainer cryptos={cryptoData} />
-            <CryptoContainer cryptos={cryptoData} />
-            </>}
+            {!user ? (
+              <LandPage handleLogIn={handleLogIn} handleSignUp={handleSignUp} />
+            ) : (
+              <>
+                <UserContainer cryptos={cryptoData} />
+                <CryptoContainer cryptos={cryptoData} />
+              </>
+            )}
           </Route>
         </Switch>
       </div>
