@@ -1,11 +1,14 @@
 import React, { useEffect, useState }  from 'react';
-import { showurl, isoId } from '../utils/utils'
+import { useAuth } from "./context/use-auth";
+import {showurl, isoId, owned } from '../utils/utils'
+import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 
 function CryptoCard(props) {
+  const auth = useAuth()
+  const [crypto, setCrypto] = useState({})
 
-let [crypto, setCrypto] = useState({})
-// let [userData, setUserData] = {}
+
 const location = useLocation();
 console.log(location.pathname)
 useEffect(() => {
@@ -20,10 +23,18 @@ useEffect(() => {
 
   return (
     <> 
-    {console.log(crypto)}
-    {crypto.userData ? <h2>You own this crypto!</h2> : <h2>Are you ready to start holding?</h2> } 
-   <img src={crypto?.logo_url} width='300' height='300'/>
-   <h2>{crypto?.name}</h2>
+    {localStorage.setItem('currentCrypto', JSON.stringify(crypto))}
+    {owned(crypto, auth.user) ?
+      <>
+        <h2>You own this crypto!</h2>
+        <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+          <h2>Buy more?</h2>
+        </NavLink> 
+      </> : <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+        <h2>Are you ready to start holding?</h2>
+      </NavLink> }
+    <img src={crypto?.logo_url} alt={crypto?.symbol+'logo'}width='300' height='300'/>
+    <h2>{crypto?.name}</h2>
     </>
   );
 }

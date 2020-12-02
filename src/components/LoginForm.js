@@ -22,17 +22,17 @@ export default function LoginForm({handleLogIn}) {
         <div>
             <div style={formDivStyle}>
             <h1>Log In</h1>
-            <form class="ui form" onSubmit={handleSubmit}>
-                <div class="field">
+            <form className="ui form" onSubmit={handleSubmit}>
+                <div className="field">
                     <label>Username</label>
                     <input value={state.username} onChange={handleChange} type="text" placeholder="username"/>
                 </div>
-                <div class="field">
+                <div className="field">
                     <label>Password</label>
                     <input value={state.password} onChange={handleChange} type="password" placeholder="password"/>
                 </div>
                 
-                <button class="ui button" type="submit">Submit</button>
+                <button className="ui button" type="submit">Submit</button>
             </form>
         </div>
         </div>

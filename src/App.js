@@ -16,17 +16,6 @@ import PrivateRoute from "./routes/PrivateRoute";
 function App() {
   const auth = useAuth();
 
-  // const handleAuthClick = (token) => {
-  //   if (!token) return console.log("sign up/in");
-  //   fetch(`http://localhost:3000/api/v1/user_auth`, {
-  //     headers: {
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //   })
-  //     .then((resp) => resp.json())
-  //     .then(setUser);
-  // };
-
   return (
     <Router>
       <div>
