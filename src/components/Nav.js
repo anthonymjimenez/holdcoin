@@ -6,7 +6,7 @@ function Nav({user}) {
   <nav>
         <ul>
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/cryptos">Home</Link>
           </li>
           <li>
               <Link to ='/blockfolio'>Blockfolio</Link>

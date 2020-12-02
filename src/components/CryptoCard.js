@@ -1,38 +1,38 @@
 import React, { useEffect, useState }  from 'react';
-import { owned } from '../utils/utils' //showurl, isoId, 
+import { useAuth } from "./context/use-auth";
+import {showurl, isoId, owned } from '../utils/utils'
 import { NavLink } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 function CryptoCard(props) {
+  const auth = useAuth()
+  const [crypto, setCrypto] = useState({})
 
-const [crypto] = useState(props.location.cryptoProps)
-const [user] = useState(props.location.user)
-let {location: {cryptoProps=null}} = props
-// let {
-//   location: { cryptoProps = null },
-// } = props;
 
+const location = useLocation();
+console.log(location.pathname)
 useEffect(() => {
-    // (!cryptoProps) ?
-    //     (async () => {
-    //     let id = isoId(props.location.pathname)
-    //     let resp = await fetch(`${showurl}${id}`)
-    //     let data = await resp.json()
-    //     // need to make fetch to userinfo and append
-    //     setCrypto(data[0])
-    //     })()
-    // : // make an IIFE and set user data 
-    //     setCrypto(cryptoProps)
+        (async () => {
+        let id = isoId(location.pathname)
+        let resp = await fetch(`${showurl}${id}`)
+        let data = await resp.json()
+        // need to make fetch to userinfo and append
+        setCrypto(data[0])
+        })()
 },[])
 
   return (
     <> 
     {localStorage.setItem('currentCrypto', JSON.stringify(crypto))}
-    {cryptoProps.userData ? <h2>You own this crypto!</h2> : <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+    {owned(crypto, auth.user) ?
+      <>
+        <h2>You own this crypto!</h2>
+        <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+          <h2>Buy more?</h2>
+        </NavLink> 
+      </> : <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
         <h2>Are you ready to start holding?</h2>
-      </NavLink> } 
-    <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
-      <h2>Buy more?</h2>
-    </NavLink> 
+      </NavLink> }
     <img src={crypto?.logo_url} alt={crypto?.symbol+'logo'}width='300' height='300'/>
     <h2>{crypto?.name}</h2>
     </>

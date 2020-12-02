@@ -1,20 +1,18 @@
-import React, { useEffect, useState } from "react";
-import Blockfolio from "../components/Blockfolio";
+import React from "react";
 import CryptoLinkContainer from "./CryptoLinkContainer";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "./context/use-auth";
 
-function UserContainer({ user }) {
-  
+function UserContainer() {
+  const auth = useAuth()
 
   return (
     <>
       <h3> Your Cryptos </h3>
-      <CryptoLinkContainer cryptos={user.cryptos} user={user} />
+      <CryptoLinkContainer cryptos={auth.user.cryptos}/>
       <NavLink
         to={{
-          pathname: `/blockfolio`,
-          cryptoProps: user.cryptos,
-          user: user
+          pathname: `/blockfolio`
         }}
       >
         Blockfolio

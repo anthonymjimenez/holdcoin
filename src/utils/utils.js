@@ -7,27 +7,12 @@ export const showurl =
 export const backendAPI =
   "http://localhost:3000/api/v1/";
 
-export const sampleUserData = [
-  {
-    symbol: "BTC",
-    holdPrice: 20000,
-    stopLimit: 10000,
-    averageCost: 13400,
-  },
-  {
-    symbol: "ETH",
-    holdPrice: 1000,
-    stopLimit: 400,
-    averageCost: 466,
-  },
-];
-
 export const isoId = (prop) => prop.split("/").slice(-1)[0];
 
 export const appendUserInfo = (setCryptoData, user) => {
   setCryptoData((cryptoData) =>
     cryptoData.map((crypto) => {
-      let userData = user.find(({ symbol }) => symbol === crypto.symbol);
+      let userData = user.cryptos.find(({ symbol }) => symbol == crypto.symbol);
       return userData ? { ...crypto, userData } : crypto;
     })
   );
@@ -36,16 +21,3 @@ export const appendUserInfo = (setCryptoData, user) => {
 export const owned = (crypto, user) => {
   return user.cryptos.some(c => c.symbol === crypto.symbol)
 }
-
-
-// export const getUserFromToken = token => {
-//   if (token) {
-//     try {
-//       return JSON.parse(atob(token.split('.')[1]));
-//     } catch (error) {
-//       // ignore
-//     }
-//   }
-
-//   return null;
-// };

@@ -1,17 +1,13 @@
 import React, { useEffect, useState } from "react";
 import CryptoLinkContainer from '../containers/CryptoLinkContainer';
 import { showurl, sampleUserData} from "../utils/utils";
+import { useAuth } from "./context/use-auth";
 
-function Blockfolio(props) {
-  let {
-    location: { cryptoProps = [] },
-  } = props;
-  let [userData, setUserData] = useState(cryptoProps);
+function Blockfolio() {
+  const auth = useAuth();
 
   useEffect(() => {
-    (async () => {
-      Promise.all(cryptoProps.map(appendCryptoInfo)).then(setUserData);
-      // fetch to user data
+    // will need to make some sort of component did mount call
     })();
   }, []);
 
@@ -23,8 +19,8 @@ function Blockfolio(props) {
   
   return (
     <> 
-      {props.location.user.cryptos.length === 0 && <h1>Time to make your first purchase</h1>}
-      {<CryptoLinkContainer cryptos={userData} user={props.location.user}/>}
+      {auth.user.cryptos.length === 0 && <h1>Time to make your first purchase</h1>}
+      {<CryptoLinkContainer cryptos={auth.user.cryptos} user={auth.user}/>}
     </>
   );
 }
