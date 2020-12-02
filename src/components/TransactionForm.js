@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react'
 
-export default function TransactionForm({user}) {
+export default function TransactionForm({crypto, user}) {
   const [state, setState] = useState({
     size: .0001,
     side: "buy",
     user_id: user?.id,
-    crypto: JSON.parse(localStorage.getItem('currentCrypto')),
+    crypto: {},
     hold_price: -1,
     stop_limit: -1
     
@@ -13,11 +13,21 @@ export default function TransactionForm({user}) {
 
   useEffect(() => {
     setState({...state, user_id: user?.id})
+    setState({...state, crypto: {
+      name: crypto.name,
+      price: parseFloat(crypto.price),
+      symbol: crypto.symbol,
+      max_supply: parseInt(crypto.max_supply)
+    }})
   }, [user])
 
   const handleChange = (e) => {
     let val = e.target.value
-    if (e.target.placeholder === "side") val = e.target.checked ? "buy" : "sell"
+    if (e.target.placeholder === "side") {
+      val = e.target.checked ? "buy" : "sell"
+    } else {
+      val = parseFloat(val)
+    }
     setState({...state, [e.target.placeholder]: val})
   }
 
@@ -49,8 +59,6 @@ export default function TransactionForm({user}) {
   return(
       <div style={formDivStyle}>
           <h1>Add Crypto to your Blockfolio</h1>
-          <img src={state.crypto?.logo_url} width='300' height='300'/>
-          <h2>{state.crypto?.name} ${state.crypto?.price}</h2>
           <form className="ui form" onSubmit={handleSubmit}>
               <div className="field">
                   <label>Size</label>

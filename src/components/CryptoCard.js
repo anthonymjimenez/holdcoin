@@ -1,12 +1,14 @@
 import React, { useEffect, useState }  from 'react';
-import { useAuth } from "./context/use-auth";
+import { useAuth } from "../context/use-auth";
 import {showurl, isoId, owned } from '../utils/utils'
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
+import TransactionForm from "./TransactionForm"
 
 function CryptoCard(props) {
   const auth = useAuth()
   const [crypto, setCrypto] = useState({})
+  const [displayForm, setDisplayForm] = useState(false)
 
 
 const location = useLocation();
@@ -27,14 +29,16 @@ useEffect(() => {
     {owned(crypto, auth.user) ?
       <>
         <h2>You own this crypto!</h2>
-        <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+        <a href="#" onClick={() => setDisplayForm(!displayForm)}>
           <h2>Buy more?</h2>
-        </NavLink> 
-      </> : <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+        </a> 
+      </> : <a href="#" onClick={() => setDisplayForm(!displayForm)} >
         <h2>Are you ready to start holding?</h2>
-      </NavLink> }
+      </a > }
     <img src={crypto?.logo_url} alt={crypto?.symbol+'logo'}width='300' height='300'/>
     <h2>{crypto?.name}</h2>
+    <h2>{crypto?.price}</h2>
+    {displayForm && <TransactionForm crypto={crypto} user={auth.user}/>}
     </>
   );
 }

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import CryptoLinkContainer from '../containers/CryptoLinkContainer';
 import { showurl, sampleUserData} from "../utils/utils";
-import { useAuth } from "./context/use-auth";
+import { useAuth } from "../context/use-auth";
 
 function Blockfolio() {
   const auth = useAuth();
 
   useEffect(() => {
     // will need to make some sort of component did mount call
-    })();
   }, []);
 
   const appendCryptoInfo = async (userData) => {

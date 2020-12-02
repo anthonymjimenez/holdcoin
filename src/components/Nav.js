@@ -1,9 +1,16 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 function Nav({user}) {
 
+  //WIP
+  const [balance, setBalance] = useState(false)
+
+  useEffect(() => {
+    setBalance(user?.balance)
+  },[user?.balance])
+  
   return (
-  <nav>
+    <nav>
         <ul>
           <li>
             <Link to="/cryptos">Home</Link>
@@ -11,19 +18,16 @@ function Nav({user}) {
           <li>
               <Link to ='/blockfolio'>Blockfolio</Link>
           </li>
-          { user ? 
+          { user &&
           <li>
             Username: {user.username}
-          </li> : null}
-          { user ? 
+          </li>}
+          { user && 
           <li>
-            Balance: {user.balance}
-          </li> : null}
-          <li>
-              <Link to ='/logout'>Logout</Link>
-          </li>
+            Balance: {balance ? balance : user.balance}
+          </li>}
         </ul>
-      </nav>
+    </nav>
 
   );
 }

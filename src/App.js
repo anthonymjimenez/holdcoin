@@ -7,7 +7,6 @@ import Nav from "./components/Nav";
 import LandPage from "./LandPage";
 import PrivateContainer from "./containers/PrivateContainer";
 import { useAuth } from "./context/use-auth";
-import { signInUser } from "./utils/utils";
 import PrivateRoute from "./routes/PrivateRoute";
 
 // need to figure out auth routes and create a new component to house App.js, if the route to app.js only fires when
@@ -19,7 +18,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        <Nav user={auth.user}/>
         {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
         {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}

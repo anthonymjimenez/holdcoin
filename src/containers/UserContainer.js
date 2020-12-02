@@ -1,7 +1,7 @@
 import React from "react";
 import CryptoLinkContainer from "./CryptoLinkContainer";
 import { NavLink } from "react-router-dom";
-import { useAuth } from "./context/use-auth";
+import { useAuth } from "../context/use-auth";
 
 function UserContainer() {
   const auth = useAuth()

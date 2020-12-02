@@ -23,10 +23,9 @@ function PrivateContainer({ cryptos }) {
 
   return (
     <div>
-      {console.log(user)}
 
-      <UserContainer cryptos={cryptoData} userInfo={user} />
-      <CryptoContainer cryptos={cryptoData} userInfo={user} />
+      <UserContainer cryptos={cryptoData} />
+      <CryptoContainer cryptos={cryptoData} />
     </div>
   );
 }
