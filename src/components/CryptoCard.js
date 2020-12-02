@@ -1,10 +1,11 @@
 import React, { useEffect, useState }  from 'react';
-import { showurl, isoId } from '../utils/utils'
+import { owned } from '../utils/utils' //showurl, isoId, 
 import { NavLink } from 'react-router-dom';
 
 function CryptoCard(props) {
 
-let [crypto, setCrypto] = useState(props.location.cryptoProps)
+const [crypto] = useState(props.location.cryptoProps)
+const [user] = useState(props.location.user)
 // let {location: {cryptoProps=null}} = props
 // let {
 //   location: { cryptoProps = null },
@@ -25,12 +26,11 @@ useEffect(() => {
 
   return (
     <> 
-    {console.log(props.location.cryptoProps)}
     {localStorage.setItem('currentCrypto', JSON.stringify(crypto))}
-    {crypto.userData ? <h2>You own this crypto!</h2> : <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+    {owned(crypto, user) ? <h2>You own this crypto!</h2> : <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
         <h2>Are you ready to start holding?</h2>
       </NavLink> } 
-    <img src={crypto?.logo_url} width='300' height='300'/>
+    <img src={crypto?.logo_url} alt={crypto?.symbol+'logo'}width='300' height='300'/>
     <h2>{crypto?.name}</h2>
     </>
   );

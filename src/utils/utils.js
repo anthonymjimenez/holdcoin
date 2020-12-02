@@ -33,6 +33,10 @@ export const appendUserInfo = (setCryptoData, user) => {
   );
 };
 
+export const owned = (crypto, user) => {
+  return user.cryptos.some(c => c.symbol === crypto.symbol)
+}
+
 
 // export const getUserFromToken = token => {
 //   if (token) {

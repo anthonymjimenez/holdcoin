@@ -114,7 +114,7 @@ function App() {
               <LandPage handleLogIn={handleLogIn} handleSignUp={handleSignUp} />
             ) : (
               <>
-                <UserContainer cryptos={user.cryptos} />
+                <UserContainer user={user} />
                 <CryptoContainer cryptos={cryptoData} />
               </>
             )}
