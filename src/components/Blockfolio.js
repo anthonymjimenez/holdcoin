@@ -23,7 +23,7 @@ function Blockfolio(props) {
   
   return (
     <> 
-      {userDprops.location.user.cryptos.length === 0 && <h1>Time to make your first purchase</h1>}
+      {props.location.user.cryptos.length === 0 && <h1>Time to make your first purchase</h1>}
       {<CryptoLinkContainer cryptos={userData} user={props.location.user}/>}
     </>
   );

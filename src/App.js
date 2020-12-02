@@ -15,7 +15,6 @@ import {
 } from "./utils/utils";
 
 import TransactionForm from "./components/TransactionForm"
-import Logout from "./components/Logout"
 
 // need to figure out auth routes and create a new component to house App.js, if the route to app.js only fires when
 // token is accepted then I can useEffect to grab userData and append to to the crypto
@@ -115,12 +114,11 @@ function App() {
             ) : (
               <>
                 <UserContainer user={user} />
-                <CryptoContainer cryptos={cryptoData} />
+                <CryptoContainer cryptos={cryptoData}/>
               </>
             )}
           </Route>
           <Route path="/transactions/new" component={() => <TransactionForm user={user} />} />
-          <Route path="/logout" component={() => <Logout handleLogout={handleLogout} />} />
         </Switch>
       </div>
     </Router>

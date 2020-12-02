@@ -6,7 +6,7 @@ function CryptoCard(props) {
 
 const [crypto] = useState(props.location.cryptoProps)
 const [user] = useState(props.location.user)
-// let {location: {cryptoProps=null}} = props
+let {location: {cryptoProps=null}} = props
 // let {
 //   location: { cryptoProps = null },
 // } = props;
@@ -27,9 +27,12 @@ useEffect(() => {
   return (
     <> 
     {localStorage.setItem('currentCrypto', JSON.stringify(crypto))}
-    {owned(crypto, user) ? <h2>You own this crypto!</h2> : <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+    {cryptoProps.userData ? <h2>You own this crypto!</h2> : <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
         <h2>Are you ready to start holding?</h2>
       </NavLink> } 
+    <NavLink to={{pathname: `/transactions/new`, cryptoProps: crypto}}>
+      <h2>Buy more?</h2>
+    </NavLink> 
     <img src={crypto?.logo_url} alt={crypto?.symbol+'logo'}width='300' height='300'/>
     <h2>{crypto?.name}</h2>
     </>
