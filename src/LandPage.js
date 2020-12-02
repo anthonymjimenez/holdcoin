@@ -15,7 +15,7 @@ function LandPage({ handleLogIn, handleSignUp }) {
     <li>
       <a className="ui a" href="#" onClick={() => setToggle(!toggleForms)}>
         {" "}
-        {toggleForms ? <h2>Sign In</h2> : <h2>Log In</h2>}
+        {toggleForms ? <h2>Signup</h2> : <h2>Log In</h2>}
       </a>
       {renderForm()}
     </li>

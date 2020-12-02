@@ -4,6 +4,9 @@ export const url =
 export const showurl =
   "https://api.nomics.com/v1/currencies/ticker?key=f5c83eef5bb0cc892333827fb4ebeefb&ids=";
 
+export const backendAPI =
+  "http://localhost:3000/api/v1/";
+
 export const sampleUserData = [
   {
     symbol: "BTC",

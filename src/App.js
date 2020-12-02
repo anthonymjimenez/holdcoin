@@ -10,9 +10,12 @@ import LandPage from "./LandPage";
 import {
   sampleUserData,
   url,
-  appendUserInfo,
-  getUserFromToken,
+  backendAPI,
+  appendUserInfo
 } from "./utils/utils";
+
+import TransactionForm from "./components/TransactionForm"
+import Logout from "./components/Logout"
 
 // need to figure out auth routes and create a new component to house App.js, if the route to app.js only fires when
 // token is accepted then I can useEffect to grab userData and append to to the crypto
@@ -22,32 +25,30 @@ function App() {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
+    // subscription hoookssss??
     (async () => {
       const results = await fetch(url);
       const data = await results.json();
       //make fetch to user info don't set to hook, just send to appendUserInfo(, userData)
       setCryptoData(data);
       appendUserInfo(setCryptoData, sampleUserData);
-      console.log(cryptoData);
     })();
     const token = localStorage.getItem("token"); // set user with token if(token & user=dne) <- that means token was set and page has been reset, in that case use token to fetch user
     // use auth routes to restrict all routes before token is set, then use token to render user
   
     if (token) {
-      fetch(`http://localhost:3000/api/v1/auto_login`, {
+      fetch(`${backendAPI}auto_login`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       })
         .then((resp) => resp.json())
-        .then((data) => {
-          console.log(data)
-        });
+        .then(setUser);
     }
   }, []);
 
   const handleSignUp = (state) => {
-    fetch(`http://localhost:3000/api/v1/users`, {
+    fetch(`${backendAPI}users`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -93,28 +94,33 @@ function App() {
       .then(setUser);
   };
 
+  const handleLogout = () => {
+    setUser(null)
+    localStorage.removeItem('token');
+  }
+
   return (
     <Router>
       <div>
-        {console.log(user)}
-        <Nav />
+        <Nav user={user}/>
 
-        {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
         {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
         <Switch>
           <Route path="/cryptos/:id" component={CryptoCard} />
           <Route path="/blockfolio" component={Blockfolio} />
-          <Route path="/">
+          <Route exact path="/">
             {!user ? (
               <LandPage handleLogIn={handleLogIn} handleSignUp={handleSignUp} />
             ) : (
               <>
-                <UserContainer cryptos={cryptoData} />
+                <UserContainer cryptos={user.cryptos} />
                 <CryptoContainer cryptos={cryptoData} />
               </>
             )}
           </Route>
+          <Route path="/transactions/new" component={() => <TransactionForm user={user} />} />
+          <Route path="/logout" component={() => <Logout handleLogout={handleLogout} />} />
         </Switch>
       </div>
     </Router>
