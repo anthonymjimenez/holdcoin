@@ -5,10 +5,8 @@ function CryptoCard(props) {
 
 let [crypto, setCrypto] = useState({})
 // let [userData, setUserData] = {}
-let {location: {cryptoProps=null}} = props
 
 useEffect(() => {
-    (!cryptoProps) ?
         (async () => {
         let id = isoId(props.location.pathname)
         let resp = await fetch(`${showurl}${id}`)
@@ -16,8 +14,6 @@ useEffect(() => {
         // need to make fetch to userinfo and append
         setCrypto(data[0])
         })()
-    : // make an IIFE and set user data 
-        setCrypto(cryptoProps)
 },[])
 
   return (

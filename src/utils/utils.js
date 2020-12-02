@@ -24,12 +24,11 @@ export const isoId = (prop) => prop.split("/").slice(-1)[0];
 export const appendUserInfo = (setCryptoData, user) => {
   setCryptoData((cryptoData) =>
     cryptoData.map((crypto) => {
-      let userData = user.find(({ symbol }) => symbol == crypto.symbol);
+      let userData = user.cryptos.find(({ symbol }) => symbol == crypto.symbol);
       return userData ? { ...crypto, userData } : crypto;
     })
   );
 };
-
 
 export const getUserFromToken = token => {
   if (token) {
@@ -39,6 +38,20 @@ export const getUserFromToken = token => {
       // ignore
     }
   }
-
   return null;
 };
+
+export const signInUser = async () => { 
+    const token = localStorage.getItem("token"); // set user with token if(token & user=dne) <- that means token was set and page has been reset, in that case use token to fetch user
+    // use auth routes to restrict all routes before token is set, then use token to render user
+    if (token) {
+      let resp = await fetch(`http://localhost:3000/api/v1/auto_login`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+    let data = await resp.json()
+    return data
+        //.then(appendUserInfo())
+    }
+}

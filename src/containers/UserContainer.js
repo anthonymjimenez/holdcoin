@@ -4,9 +4,9 @@ import CryptoLinkContainer from "./CryptoLinkContainer";
 import { NavLink } from "react-router-dom";
 
 function UserContainer({ cryptos }) {
-  
+  console.log(cryptos)
   const filterCryptos = (cryptos) =>
-    cryptos.filter((cryptos) => cryptos.userData);
+    cryptos.filter((cryptos) => cryptos);
 
   return (
     <>
@@ -15,7 +15,6 @@ function UserContainer({ cryptos }) {
       <NavLink
         to={{
           pathname: `/blockfolio`,
-          cryptoProps: filterCryptos(cryptos),
         }}
       >
         Blockfolio

@@ -3,13 +3,14 @@ import CryptoLinkContainer from '../containers/CryptoLinkContainer';
 import { showurl, sampleUserData} from "../utils/utils";
 
 function Blockfolio(props) {
+  console.log(props)
   let {
     location: { cryptoProps = [] },
   } = props;
-  let [userData, setUserData] = useState(cryptoProps);
+  let [userCryptoData, setUserData] = useState(cryptoProps);
 
   useEffect(() => {
-   userData.length == 0 && (async () => {
+   userCryptoData.length == 0 && (async () => {
       Promise.all(sampleUserData.map(appendCryptoInfo)).then(setUserData);
       // fetch to user data
     })();
@@ -22,8 +23,8 @@ function Blockfolio(props) {
   }; // need to add loading 
   return (
     <> 
-      {userData.length == 0 && <h1>Time to make your first purchase</h1>}
-      {<CryptoLinkContainer cryptos={userData}/>}
+      {userCryptoData.length == 0 && <h1>Time to make your first purchase</h1>}
+      {<CryptoLinkContainer cryptos={userCryptoData}/>}
  
     </>
   );
