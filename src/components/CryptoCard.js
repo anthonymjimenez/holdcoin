@@ -1,14 +1,16 @@
 import React, { useEffect, useState }  from 'react';
 import { showurl, isoId } from '../utils/utils'
+import { useLocation } from 'react-router-dom';
 
 function CryptoCard(props) {
 
 let [crypto, setCrypto] = useState({})
 // let [userData, setUserData] = {}
-
+const location = useLocation();
+console.log(location.pathname)
 useEffect(() => {
         (async () => {
-        let id = isoId(props.location.pathname)
+        let id = isoId(location.pathname)
         let resp = await fetch(`${showurl}${id}`)
         let data = await resp.json()
         // need to make fetch to userinfo and append

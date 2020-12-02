@@ -38,7 +38,7 @@ function App() {
           <PrivateRoute path="/cryptos/:id">
             <CryptoCard />
           </PrivateRoute>
-          <PrivateRoute path="/blockfolio" props={'hello'}>
+          <PrivateRoute path="/blockfolio">
             <Blockfolio />
           </PrivateRoute>
           <PrivateRoute path="/cryptos">

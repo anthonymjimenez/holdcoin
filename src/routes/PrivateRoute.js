@@ -1,22 +1,24 @@
 import { useAuth } from "../context/use-auth";
 import { Route, Redirect } from "react-router-dom";
-import { Fragment } from "react";
-export default function PrivateRoute(props) {
+export default function PrivateRoute({ children, ...rest }) {
     let auth = useAuth();
-    console.log(auth.user)
+    // check for token to avoid re routing when not starting from land page
+    
     return (
-      <Fragment>
-          {
+      <Route
+        {...rest}
+        render={({ location }) =>
           auth.user ? (
-            props.children
+            children
           ) : (
             <Redirect
               to={{
-                pathname: "/"
+                pathname: "/",
+                state: { from: location }
               }}
             />
           )
         }
-      </Fragment>
+      />
     );
   }
