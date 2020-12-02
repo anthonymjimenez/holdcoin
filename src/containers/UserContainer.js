@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-import Blockfolio from "../components/Blockfolio";
+import React from "react";
 import CryptoLinkContainer from "./CryptoLinkContainer";
 import { NavLink } from "react-router-dom";
 

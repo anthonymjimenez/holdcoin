@@ -82,7 +82,6 @@ const [auth, setAuth] = useState(false)
       setAuth(true)
       console.log(data)
       setUser(await data)
-      
     }
   };
   const signout = () => {

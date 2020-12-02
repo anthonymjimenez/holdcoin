@@ -5,7 +5,8 @@ import { url, signInUser } from "../utils/utils";
 
 function PrivateContainer({ cryptos }) {
   let [cryptoData, setCryptoData] = useState([]);
-  const [user, setUser] = useState(null);
+//useAuth grab user use to render user crypto quickinfo
+// render cryptos and only append userinfo in crypto card?
 
   useEffect(() => {
     (async () => {
