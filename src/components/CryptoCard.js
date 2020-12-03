@@ -10,7 +10,7 @@ function CryptoCard(props) {
   const [displayForm, setDisplayForm] = useState(false);
   const [userData, setUserData] = useState({})
   const location = useLocation();
-  console.log(userData)
+  
   useEffect(() => {
     (async () => {
       let id = isoId(location.pathname);
@@ -20,15 +20,15 @@ function CryptoCard(props) {
       setCrypto(data[0]);
       setUserData(find(crypto, auth.user))
      })()
-    // const interval = setInterval(async () => {
-    //   let id = isoId(location.pathname);
-    //   let resp = await fetch(`${showurl}${id}`);
-    //   let data = await resp.json();
-    //   // need to make fetch to userinfo and append
-    //   console.log("MMM");
-    //   setCrypto(data[0]);
-    // }, 10000);
-    // return () => clearInterval(interval);
+    const interval = setInterval(async () => {
+      let id = isoId(location.pathname);
+      let resp = await fetch(`${showurl}${id}`);
+      let data = await resp.json();
+      // need to make fetch to userinfo and append
+      console.log("MMM");
+      setCrypto(data[0]);
+    }, 10000);
+    return () => clearInterval(interval);
   }, []);
 
   return (
