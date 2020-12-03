@@ -23,7 +23,6 @@ function PrivateContainer({ cryptos }) {
 
   return (
     <div>
-          {console.log(auth.user)}
 
       {console.log(cryptoData)}
       <UserContainer cryptos={cryptoData.filter((c) => c.userData)} />

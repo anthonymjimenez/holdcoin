@@ -40,13 +40,20 @@ export const getUnique = (arr, index = "symbol") => {
 
 };
 
-export function totalSpend(user, crypto) {
-  console.log(user.transactions.filter(t => t.symbol === crypto.symbol))
+export function totalSpendPerCrypto(user, crypto) {
   return user.transactions.filter(t => t.symbol === crypto.symbol).reduce((sum, t) => sum + t.totalPrice, 0);
 }
 
-export function totalSize(user, crypto) {
-  return user.transactions.filter(t => t.symbol === crypto.symbol).reduce((sum, t) => sum + t.size, 0);
+export function totalSpend(user) {
+  return user.transactions.reduce((sum, t) => sum + t.totalPrice, 0);
+}
+
+export function totalSizePerCrypto(user, crypto) {
+  return user.transactions.filter(t => t.symbol === crypto.symbol).reduce((sum, t) => sum + t.size, 0)
+}
+
+export function totalSize(user) {
+  return user.transactions.reduce((sum, t) => sum + t.size, 0);
 }
 
 

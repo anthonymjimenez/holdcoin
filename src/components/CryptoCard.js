@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/use-auth";
-import { showurl, isoId, owned, financial, find, totalSize, totalSpend} from "../utils/utils";
+import { showurl, isoId, owned, financial, find, totalSizePerCrypto, totalSpendPerCrypto} from "../utils/utils";
 import { useLocation } from "react-router-dom";
 import TransactionForm from "./TransactionForm";
 
@@ -54,10 +54,10 @@ function CryptoCard(props) {
           <a href="#" onClick={() => setDisplayForm(!displayForm)}>
             <h2>Buy more?</h2>
           </a>
-          <h4>Coins Owned: {totalSize(auth.user, crypto)}</h4>
-          <h4>Total Spent: {totalSpend(auth.user, crypto)}</h4>
+          <h4>Coins Owned: {totalSizePerCrypto(auth.user, crypto)}</h4>
+          <h4>Total Spent: {totalSpendPerCrypto(auth.user, crypto)}</h4>
           <h4>
-            Total Return: {crypto.price * totalSize(auth.user, crypto) - totalSpend(auth.user, crypto)}
+            Total Return: {crypto.price * totalSizePerCrypto(auth.user, crypto) - totalSpendPerCrypto(auth.user, crypto)}
           </h4>
         </>
       ) : (
