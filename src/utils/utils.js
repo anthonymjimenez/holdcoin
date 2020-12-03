@@ -11,7 +11,7 @@ export const isoId = (prop) => prop.split("/").slice(-1)[0];
 export const appendUserInfo = (setCryptoData, user) => {
   setCryptoData((cryptoData) =>
     cryptoData.map((crypto) => {
-      let userData = user.cryptos.find(({ symbol }) => symbol == crypto.symbol);
+      let userData = user.cryptos.find(({ symbol }) => symbol === crypto.symbol);
       return userData ? { ...crypto, userData } : crypto;
     })
   );
@@ -39,3 +39,19 @@ export const getUnique = (arr, index = "symbol") => {
     .map((e) => arr[e]);
 
 };
+
+export function totalSpend(user, crypto) {
+  console.log(user.transactions.filter(t => t.symbol === crypto.symbol))
+  return user.transactions.filter(t => t.symbol === crypto.symbol).reduce((sum, t) => sum + t.totalPrice, 0);
+}
+
+export function totalSize(user, crypto) {
+  return user.transactions.filter(t => t.symbol === crypto.symbol).reduce((sum, t) => sum + t.size, 0);
+}
+
+
+
+// export function averagePrice(user, crypto) {
+//   const matchedCryptos = user.cryptos.filter(c => c?.symbol === crypto.symbol)
+//   return matchedCryptos.reduce((sum, t) => sum + t.size, 0) / matchedCryptos.length
+// }

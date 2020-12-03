@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuth } from "../context/use-auth";
-import { showurl, isoId, owned, financial, find } from "../utils/utils";
+import { showurl, isoId, owned, financial, find, totalSize, totalSpend} from "../utils/utils";
 import { useLocation } from "react-router-dom";
 import TransactionForm from "./TransactionForm";
 
@@ -18,7 +18,7 @@ function CryptoCard(props) {
       let data = await resp.json();
       // need to make fetch to userinfo and append
       setCrypto(data[0]);
-     setUserData(find(crypto, auth.user))
+      setUserData(find(crypto, auth.user))
      })()
     // const interval = setInterval(async () => {
     //   let id = isoId(location.pathname);
@@ -54,10 +54,10 @@ function CryptoCard(props) {
           <a href="#" onClick={() => setDisplayForm(!displayForm)}>
             <h2>Buy more?</h2>
           </a>
-          <h4>Coins Owned: userData.size</h4>
-          <h4>Total Spent: userData.cost</h4>
+          <h4>Coins Owned: {totalSize(auth.user, crypto)}</h4>
+          <h4>Total Spent: {totalSpend(auth.user, crypto)}</h4>
           <h4>
-            Total Return: crypto.currentPrice * userData.size - userData.cost
+            Total Return: {crypto.price * totalSize(auth.user, crypto) - totalSpend(auth.user, crypto)}
           </h4>
         </>
       ) : (
@@ -65,6 +65,7 @@ function CryptoCard(props) {
           <h2>Are you ready to start holding?</h2>
         </a>
       )}
+      {console.log(displayForm)}
       {displayForm && (
         <TransactionForm
           crypto={crypto}

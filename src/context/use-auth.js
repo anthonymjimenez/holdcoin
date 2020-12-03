@@ -24,7 +24,7 @@ export const useAuth = () => {
 
 function useProvideAuth() {
   const [user, setUser] = useState(null);
-const [auth, setAuth] = useState(false)
+  const [auth, setAuth] = useState(false)
   // Wrap any Firebase methods we want to use making sure ...
 
   // ... to save the user to state.
@@ -49,8 +49,10 @@ const [auth, setAuth] = useState(false)
       })
       .catch(console.error);
   };
+
   const updateBalance = (data) => {
-    setUser((user) => { return {...user, balance: user.balance - (data.crypto.price * data.transaction.size) }})
+    console.log(data)
+    setUser((user) => { return {...user, balance: user.balance - (data.transaction.total_price) }})
     }
 
   const signup = (state) => {
@@ -64,7 +66,6 @@ const [auth, setAuth] = useState(false)
     })
       .then((resp) => resp.json())
       .then((data) => {
-        console.log(data);
         setAuth(true)
         localStorage.setItem("token", data.jwt);
         setUser(data.user)
@@ -109,7 +110,7 @@ const [auth, setAuth] = useState(false)
   // ... latest auth object.
 
   useEffect(() => {
-   (() => (user ? setUser(user) : setUser(false)))();
+    (() => (user ? setUser(user) : setUser(false)))();
   }, []);
 
   // Return the user object and auth methods
