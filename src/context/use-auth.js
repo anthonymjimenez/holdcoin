@@ -95,6 +95,9 @@ const [auth, setAuth] = useState(false)
     setAuth(false)
   };
   
+  const deleteUser = async () => {
+    // { ... }
+  }
   
 
   // Subscribe to user on mount

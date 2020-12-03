@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CryptoCard from "./components/CryptoCard";
 import Blockfolio from "./components/Blockfolio";
 import Nav from "./components/Nav";
+import Ledger from "./components/Ledger";
+
 import LandPage from "./LandPage";
 import PrivateContainer from "./containers/PrivateContainer";
 import { useAuth } from "./context/use-auth";
@@ -42,6 +44,9 @@ function App() {
           </PublicRoute>
           <PrivateRoute path="/userinfo">
             <UserInfo />
+          </PrivateRoute>
+          <PrivateRoute path="/ledger">
+            <Ledger />
           </PrivateRoute>
           <PrivateRoute path="/">
             <PrivateContainer />

@@ -26,8 +26,11 @@ function Blockfolio() {
   return (
     <> 
       {auth.user.cryptos.length === 0 && <h1>Time to make your first purchase</h1>}
+      <h2>Buying Power: balance</h2>
       <h2>Total Spent: (add up all cost)</h2>
       <h2>Total Returns: (The cost of buying the same amount of coin today(calc and sum the (size*current_cost) of all owned coins ) - (all cost)</h2>
+      <h2>Todays Returns: TBD</h2>
+      <button>Add money to balance</button>
       <BlockLinkContainer cryptos={getUnique(auth.user.cryptos)}/>
       <hr/>
       <NavLink to={{pathname: `/userinfo`}}>
