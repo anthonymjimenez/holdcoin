@@ -57,8 +57,7 @@ function CryptoCard(props) {
           <h4>Coins Owned: userData.size</h4>
           <h4>Total Spent: userData.cost</h4>
           <h4>
-            Total Return: crypto.currentPrice * userData.size - userData.averageCost*
-            userData.size{" "}
+            Total Return: crypto.currentPrice * userData.size - userData.cost
           </h4>
         </>
       ) : (
