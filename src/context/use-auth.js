@@ -45,10 +45,13 @@ const [auth, setAuth] = useState(false)
         setAuth(true)
 
         localStorage.setItem("token", data.jwt);
-        setUser(data)
+        setUser(data.user)
       })
       .catch(console.error);
   };
+  const updateBalance = (data) => {
+    setUser((user) => { return {...user, balance: user.balance - (data.crypto.price * data.transaction.size) }})
+    }
 
   const signup = (state) => {
     fetch(`http://localhost:3000/api/v1/users`, {
@@ -82,13 +85,17 @@ const [auth, setAuth] = useState(false)
       setAuth(true)
       console.log(data)
       setUser(await data)
+      return true
     }
+    return false
   };
   const signout = () => {
     localStorage.clear();
     setUser(false);
     setAuth(false)
   };
+  
+  
 
   // Subscribe to user on mount
 
@@ -111,5 +118,6 @@ const [auth, setAuth] = useState(false)
     signup,
     signout,
     signInFromToken,
+    updateBalance
   };
 }

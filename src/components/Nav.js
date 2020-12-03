@@ -1,13 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
 function Nav({user}) {
-
-  //WIP
-  const [balance, setBalance] = useState(false)
-
-  useEffect(() => {
-    setBalance(user?.balance)
-  },[user?.balance])
   
   return (
     <nav>
@@ -24,7 +17,7 @@ function Nav({user}) {
           </li>}
           { user && 
           <li>
-            Balance: {balance ? balance : user.balance}
+            Balance: {user.balance}
           </li>}
         </ul>
     </nav>

@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import LoginForm from "./components/LoginForm";
 import SignupForm from "./components/SignupForm";
 import { useAuth } from "./context/use-auth";
 function LandPage() {
-  let [toggleForms, setToggle] = useState(false);
   
+  let [toggleForms, setToggle] = useState(false);
+
   const auth = useAuth();
 
   const renderForm = () =>
@@ -14,12 +15,6 @@ function LandPage() {
       <SignupForm handleSignUp={auth.signup} />
     );
 
-    useEffect(() => {
-      (() => {
-       auth.signInFromToken()
-       console.log(auth.user) 
-      })();
-    }, []);
   return (
     <li>
       <a className="ui a" href="#" onClick={() => setToggle(!toggleForms)}>

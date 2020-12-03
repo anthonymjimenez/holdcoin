@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CryptoCard from "./components/CryptoCard";
@@ -8,12 +8,20 @@ import LandPage from "./LandPage";
 import PrivateContainer from "./containers/PrivateContainer";
 import { useAuth } from "./context/use-auth";
 import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
+import UserInfo from './components/UserInfo'
 
 // need to figure out auth routes and create a new component to house App.js, if the route to app.js only fires when
 // token is accepted then I can useEffect to grab userData and append to to the crypto
 
 function App() {
   const auth = useAuth();
+  useEffect(() => {
+    (() => {
+      auth.signInFromToken();
+      console.log(auth.user);
+    })();
+  }, []);
 
   return (
     <Router>
@@ -29,12 +37,15 @@ function App() {
           <PrivateRoute path="/blockfolio">
             <Blockfolio />
           </PrivateRoute>
-          <PrivateRoute path="/cryptos">
+          <PublicRoute path="/public">
+            <LandPage />
+          </PublicRoute>
+          <PrivateRoute path="/userinfo">
+            <UserInfo />
+          </PrivateRoute>
+          <PrivateRoute path="/">
             <PrivateContainer />
           </PrivateRoute>
-          <Route path="/">
-            <LandPage />
-          </Route>
         </Switch>
       </div>
     </Router>
