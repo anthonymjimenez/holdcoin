@@ -45,19 +45,21 @@ export function totalSpendPerCrypto(user, crypto) {
 }
 
 export function totalSpend(user) {
-  return user.transactions.reduce((sum, t) => sum + t.totalPrice, 0);
+  return user.transactions.reduce((sum, t) => sum + t.totalPrice, 0) ;
 }
 
 export function totalSizePerCrypto(user, crypto) {
-  return user.transactions.filter(t => t.symbol === crypto.symbol).reduce((sum, t) => sum + t.size, 0)
+ let filter = user.transactions.filter(t => t.symbol === crypto.symbol)
+ return filter.reduce((sum, t) => { return sum + t.size}, 0)
 }
 
 export function totalSize(user) {
   return user.transactions.reduce((sum, t) => sum + t.size, 0);
 }
 
-
-
+export function averageCost(user, crypto ) {
+  return totalSpendPerCrypto(user,crypto) / totalSizePerCrypto(user,crypto)
+}
 // export function averagePrice(user, crypto) {
 //   const matchedCryptos = user.cryptos.filter(c => c?.symbol === crypto.symbol)
 //   return matchedCryptos.reduce((sum, t) => sum + t.size, 0) / matchedCryptos.length
