@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
+import {financial} from "../utils/utils";
+
 function Nav({user}) {
   
   return (
@@ -17,7 +19,7 @@ function Nav({user}) {
           </li>}
           { user && 
           <li>
-            Balance: {user.balance}
+            Balance: {financial(user.balance)}
           </li>}
         </ul>
     </nav>
