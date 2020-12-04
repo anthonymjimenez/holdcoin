@@ -11,7 +11,7 @@ export const isoId = (prop) => prop.split("/").slice(-1)[0];
 export const appendUserInfo = (setCryptoData, user) => {
   setCryptoData((cryptoData) =>
     cryptoData.map((crypto) => {
-      let userData = user.cryptos.find(({ symbol }) => symbol === crypto.symbol);
+      let userData = user?.cryptos?.find(({ symbol }) => symbol === crypto.symbol);
       return userData ? { ...crypto, userData } : crypto;
     })
   );

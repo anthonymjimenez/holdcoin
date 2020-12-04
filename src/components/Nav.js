@@ -13,14 +13,6 @@ function Nav({user}) {
           <li>
               <Link to ='/blockfolio'>Blockfolio</Link>
           </li>
-          { user &&
-          <li>
-            Username: {user.username}
-          </li>}
-          { user && 
-          <li>
-            Balance: {financial(user.balance)}
-          </li>}
         </ul>
     </nav>
 
