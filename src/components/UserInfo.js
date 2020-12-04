@@ -1,7 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/use-auth';
-import AddBalance from './AddBalance'
 
 function UserInfo() {
   const auth = useAuth()
@@ -14,7 +13,6 @@ function UserInfo() {
       </NavLink>
 
     <p>Change password, change username, delete user (add these methods to auth object)</p>
-    <AddBalance user={auth.user}/>
     <p>Remove hold goals</p>
     </>
   );
