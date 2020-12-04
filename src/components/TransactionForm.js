@@ -34,7 +34,10 @@ export default function TransactionForm({ crypto, user, updateBalance }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/api/v1/transactions", {
+    if (state.size * state.crypto.price > user.balance) {
+      window.alert("You don't have enough money :(")
+    } else {
+      fetch("http://localhost:3000/api/v1/transactions", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -51,6 +54,8 @@ export default function TransactionForm({ crypto, user, updateBalance }) {
       //   console.log(data);
       // })
       .catch(console.log);
+    }
+    
   };
 
   // add to css

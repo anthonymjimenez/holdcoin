@@ -9,14 +9,12 @@ import Ledger from "./components/Ledger";
 import LandPage from "./LandPage";
 import PrivateContainer from "./containers/PrivateContainer";
 import { useAuth } from "./context/use-auth";
-// import PrivateRoute from "./routes/PrivateRoute";
-// import PublicRoute from "./routes/PublicRoute";
+import PrivateRoute from "./routes/PrivateRoute";
+import PublicRoute from "./routes/PublicRoute";
 import UserInfo from './components/UserInfo';
 import SuccessPage from "./components/SuccessPage";
 import Cancel from "./components/Cancel"
 
-const PublicRoute = React.lazy(() => import("./routes/PublicRoute"));
-const PrivateRoute = React.lazy(() => import("./routes/PrivateRoute"));
 
 // need to figure out auth routes and create a new component to house App.js, if the route to app.js only fires when
 // token is accepted then I can useEffect to grab userData and append to to the crypto

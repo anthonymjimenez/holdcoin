@@ -25,7 +25,6 @@ function CryptoCard(props) {
       let resp = await fetch(`${showurl}${id}`);
       let data = await resp.json();
       // need to make fetch to userinfo and append
-      console.log("MMM");
       setCrypto(data[0]);
     }, 1000);
     return () => clearInterval(interval);
@@ -55,7 +54,7 @@ function CryptoCard(props) {
             <h2>Buy more?</h2>
           </a>
           <h4>Current Balance: {financial(auth.user.balance)}</h4>
-          <h4>Coins Owned: {totalSizePerCrypto(auth.user, crypto)}</h4>
+          <h4>Coins Owned: {financial(totalSizePerCrypto(auth.user, crypto))}</h4>
           <h4>Total Spent: {financial(totalSpendPerCrypto(auth.user, crypto))}</h4>
           <h4>Average Cost: {financial(averageCost(auth.user,crypto))}</h4>
           <h4>
@@ -70,7 +69,6 @@ function CryptoCard(props) {
         <h4>Current Balance: {financial(auth.user.balance)}</h4>
         </>
       )}
-      {console.log(displayForm)}
       {displayForm && (
         <TransactionForm
           crypto={crypto}

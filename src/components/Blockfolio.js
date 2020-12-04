@@ -68,6 +68,7 @@ function Blockfolio() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
+    console.log(balance)
     if (balance >= 1) {
       reload(e)
     } else {
