@@ -8,9 +8,7 @@ const CryptoLinkContainer = ({ cryptos}) => {
     cryptos.map((crypto, index) => <CryptoLink key={index} crypto={crypto}/>);
   ;
   return (
-    <div>
-      {renderLinks()}
-    </div>
+      renderLinks()
   );
 };
 export default CryptoLinkContainer;

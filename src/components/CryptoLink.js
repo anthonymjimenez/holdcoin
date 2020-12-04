@@ -6,10 +6,12 @@ function CryptoLink({crypto, user}) {
 
   return (
     <>
-    <NavLink to={{pathname: `/cryptos/${crypto.symbol}`}}>
-        <p>{crypto.symbol} / Price: {financial(crypto.price)}</p> 
-      </NavLink>
-  
+    <tr>
+      <td><NavLink to={{pathname: `/cryptos/${crypto.symbol}`}}>
+          <p>{crypto.symbol}</p> 
+        </NavLink></td>
+      <td className="text-center">${financial(crypto.price)}</td>
+    </tr>
     </>
   );
 }

@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
 import "./App.css";
+import "./utils/css/black-dashboard-react.css";
+import "./utils/css/black-dashboard-react.css.map";
+import "./utils/css/black-dashboard-react.min.css";
+import "./utils/css/nucleo-icons.css"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CryptoCard from "./components/CryptoCard";
 import Blockfolio from "./components/Blockfolio";
