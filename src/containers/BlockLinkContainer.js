@@ -1,6 +1,6 @@
 import React from "react";
 import BlockLink from "../components/BlockLink";
-import { getUnique, totalSizePerCrypto, totalSpend, financial, averageCost } from "../utils/utils";
+import {totalSizePerCrypto, averageCost } from "../utils/utils";
 import { useAuth } from "../context/use-auth";
 
 const BlockLinkContainer = ({ cryptos}) => {
@@ -11,7 +11,6 @@ const BlockLinkContainer = ({ cryptos}) => {
   ;
   return (
     <div>
-      {console.log(averageCost(auth.user, cryptos[1]))}
 
       {renderLinks()}
     </div>

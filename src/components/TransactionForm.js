@@ -46,7 +46,7 @@ export default function TransactionForm({ crypto, user, updateBalance }) {
       .then((data) => data.json())
       .then(console.log(user))
       .then(updateBalance)
-      .then(updateCryptos)
+      // .then(updateCryptos)
       // .then((data) => {
       //   console.log(data);
       // })

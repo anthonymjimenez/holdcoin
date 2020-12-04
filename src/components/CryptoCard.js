@@ -46,7 +46,7 @@ function CryptoCard(props) {
       <h3>Thirty Day Returns: {financial(crypto['30d']?.price_change_pct * 100)}% </h3> 
 
       <h3>Market Cap: ${crypto.market_cap}</h3>
-      {console.log(crypto)}
+      
 
       {owned(crypto, auth.user) ? (
         <>
@@ -54,17 +54,21 @@ function CryptoCard(props) {
           <a href="#" onClick={() => setDisplayForm(!displayForm)}>
             <h2>Buy more?</h2>
           </a>
+          <h4>Current Balance: {financial(auth.user.balance)}</h4>
           <h4>Coins Owned: {totalSizePerCrypto(auth.user, crypto)}</h4>
-          <h4>Total Spent: {totalSpendPerCrypto(auth.user, crypto)}</h4>
-          <h4>Average Cost: {averageCost(auth.user,crypto)}</h4>
+          <h4>Total Spent: {financial(totalSpendPerCrypto(auth.user, crypto))}</h4>
+          <h4>Average Cost: {financial(averageCost(auth.user,crypto))}</h4>
           <h4>
             Total Return: {crypto.price * totalSizePerCrypto(auth.user, crypto) - totalSpendPerCrypto(auth.user, crypto)}
           </h4>
         </>
       ) : (
+        <>
         <a href="#" onClick={() => setDisplayForm(!displayForm)}>
           <h2>Are you ready to start holding?</h2>
         </a>
+        <h4>Current Balance: {financial(auth.user.balance)}</h4>
+        </>
       )}
       {console.log(displayForm)}
       {displayForm && (

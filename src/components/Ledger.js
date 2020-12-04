@@ -1,7 +1,7 @@
 import React from 'react';
 import { useAuth } from '../context/use-auth';
 import { NavLink } from 'react-router-dom';
-import { showurl, isoId, owned, financial, find, totalSizePerCrypto, totalSpendPerCrypto, averageCost} from "../utils/utils";
+import { financial} from "../utils/utils";
 
 
 function Ledger() {

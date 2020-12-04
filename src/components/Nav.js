@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
 import { Link } from "react-router-dom";
-import {financial} from "../utils/utils";
+import { NavLink } from "react-router-dom";
 
 function Nav({user}) {
   
@@ -13,6 +12,12 @@ function Nav({user}) {
           <li>
               <Link to ='/blockfolio'>Blockfolio</Link>
           </li>
+          {user && <li>
+          <NavLink to={{ pathname: `/userinfo` }}>
+            Account Information
+          </NavLink>
+          </li>}
+          
         </ul>
     </nav>
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Suspense } from "react";
 import "./App.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import CryptoCard from "./components/CryptoCard";
@@ -9,11 +9,14 @@ import Ledger from "./components/Ledger";
 import LandPage from "./LandPage";
 import PrivateContainer from "./containers/PrivateContainer";
 import { useAuth } from "./context/use-auth";
-import PrivateRoute from "./routes/PrivateRoute";
-import PublicRoute from "./routes/PublicRoute";
+// import PrivateRoute from "./routes/PrivateRoute";
+// import PublicRoute from "./routes/PublicRoute";
 import UserInfo from './components/UserInfo';
 import SuccessPage from "./components/SuccessPage";
 import Cancel from "./components/Cancel"
+
+const PublicRoute = React.lazy(() => import("./routes/PublicRoute"));
+const PrivateRoute = React.lazy(() => import("./routes/PrivateRoute"));
 
 // need to figure out auth routes and create a new component to house App.js, if the route to app.js only fires when
 // token is accepted then I can useEffect to grab userData and append to to the crypto
@@ -28,12 +31,14 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div>
+    <div>
+      <Router>
+      
         <Nav user={auth.user}/>
         {/* <button onClick={handleAuthClick} className="ui button">Access Authorized Route</button> */}
         {/* A <Switch> looks through its children <Route>s and
           renders the first one that matches the current URL. */}
+          <Suspense fallback={<div>Loading...</div>}>
         <Switch>
           <PrivateRoute path="/cryptos/:id">
             <CryptoCard />
@@ -60,8 +65,10 @@ function App() {
             <PrivateContainer />
           </PrivateRoute>
         </Switch>
-      </div>
-    </Router>
+        </Suspense>
+      
+      </Router>
+    </div>
   );
 }
 

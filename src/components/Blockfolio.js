@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import BlockLinkContainer from "../containers/BlockLinkContainer";
 import { NavLink } from "react-router-dom";
-import { showurl, totalSpendPerCrypto } from "../utils/utils";
+import { showurl} from "../utils/utils";
 import { useAuth } from "../context/use-auth";
 import {
   getUnique,
@@ -25,7 +25,6 @@ function Blockfolio() {
   const [show, setShow] = useState(false);
   useEffect(() => {
     // will need to make some sort of component did mount call
-    console.log(auth.user);
     if (auth.user.cryptos) {
       let uniqueCryptos = getUnique(auth.user.cryptos);
       Promise.all(uniqueCryptos.map(appendCryptoInfo)).then(setUserData);
@@ -93,7 +92,6 @@ function Blockfolio() {
     const usdValueOfCoins = () => 
    totalReturn()/100 * totalSpend(auth.user) + totalSpend(auth.user)
     
-    console.log(usdValueOfCoins())
   return (
     <>
       {auth.user.cryptos.length === 0 && (
@@ -101,9 +99,19 @@ function Blockfolio() {
       )}
       <h2>Buying Power: {financial(auth.user.balance)}</h2>
       <h2>Total Spent: {financial(totalSpend(auth.user))}</h2>
-      <h2>
-      Total Returns: {userData.length > 1 ? financial(userData.reduce((sum, c) => sum + (c.price * totalSizePerCrypto(auth.user, c)) , 0) - totalSpend(auth.user)): <p>Keep buying to calculate</p>}  </h2>
-      <h2>Todays Returns: TBD</h2>
+      <h2>Total Returns: 
+        {userData.length > 1 ? (
+          <>
+              %{financial(totalReturn())}{" "}
+            <h3>
+              Current USD Value of Owned Coins:
+              ${financial(usdValueOfCoins())}
+              <br></br>All Capital: ${financial(usdValueOfCoins() + auth.user.balance)}
+            </h3>
+          </>
+        ) : (
+          <p>Keep buying to calculate</p>
+        )}{" "}</h2>
       <button onClick={() => setShow(!show)}>Add money to balance</button>
       {show && <div>
             <div style={{margin: "auto",padding: "20px", width: "80%" }}>
@@ -116,21 +124,7 @@ function Blockfolio() {
             </form>
           </div>
         </div>}
-        Total Returns: 
-        {userData.length > 1 ? (
-          <>
-              %{financial(totalReturn())}{" "}
-            <h3>
-              Current USD Value of Owned Coins:
-              ${financial(usdValueOfCoins())}
-              <br></br>All Capital: ${financial(usdValueOfCoins() + auth.user.balance)}
-            </h3>
-          </>
-        ) : (
-          <p>Keep buying to calculate</p>
-        )}{" "}
-      </h2>
-      <button>Add money to balance</button>
+
       <BlockLinkContainer cryptos={getUnique(auth.user.cryptos)} />
       <hr />
       <NavLink to={{ pathname: `/userinfo` }}>

@@ -1,6 +1,5 @@
 import React  from 'react';
 import { NavLink } from 'react-router-dom';
-import { financial } from '../utils/utils'
 
 function BlockLink({crypto, averageCost, size}) {
   return (
