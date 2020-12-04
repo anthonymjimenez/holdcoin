@@ -90,15 +90,31 @@ function useProvideAuth() {
     }
     return false
   };
+
+  const updateUserName = async (newUserObject) => {
+    const token = localStorage.getItem("token"); // set user with token if(token & user=dne) <- that means token was set and page has been reset, in that case use token to fetch user
+      let resp = await fetch(`http://localhost:3000/api/v1/users/`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-type': 'application/json'
+        },
+        method: 'PUT'
+      });
+      let data = await resp.json();
+      setUser(await data)
+    
+  };
+
+  const deleteUser = async () => {
+    // { ... }
+  }
   const signout = () => {
     localStorage.clear();
     setUser(false);
     setAuth(false)
   };
   
-  const deleteUser = async () => {
-    // { ... }
-  }
+
   
 
   // Subscribe to user on mount
