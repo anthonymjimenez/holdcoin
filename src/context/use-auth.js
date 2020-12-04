@@ -54,7 +54,7 @@ function useProvideAuth() {
     console.log(data)
     setUser((user) => { return {...user, balance: user.balance - (data.transaction.total_price) }})
     }
-
+// updatecrypto function ? like update balance but replace user crypto 
   const signup = (state) => {
     fetch(`http://localhost:3000/api/v1/users`, {
       method: "POST",

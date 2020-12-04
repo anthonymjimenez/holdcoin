@@ -4,9 +4,11 @@ import { useAuth } from '../context/use-auth';
 
 function UserInfo() {
   let auth = useAuth()
+  let user = auth.user
   return (
     <>
     <h2>User Info</h2>
+    <h3>Username: {user.username}</h3>
     <p>whoami(Adding this info should be easy with the useAuth hook)</p>
     <NavLink to={{pathname: `/ledger`}}>
         <p>View Ledger</p> 

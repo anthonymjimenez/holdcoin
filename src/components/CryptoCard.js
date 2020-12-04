@@ -27,7 +27,7 @@ function CryptoCard(props) {
       // need to make fetch to userinfo and append
       console.log("MMM");
       setCrypto(data[0]);
-    }, 10000);
+    }, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -40,7 +40,7 @@ function CryptoCard(props) {
         height="300"
       />
       <h3>{crypto.name}({crypto.symbol})</h3>
-      <h3>Current Price: {financial(crypto.price)}</h3>
+      <h3>Current Price: {crypto.price}</h3>
       <h3>All-Time High: ${financial(crypto.high)} was set on {crypto.high_timestamp?.split('T')[0]}</h3>
       <h3>Year to Date Returns: {financial(crypto.ytd?.price_change_pct * 100)}% </h3>
       <h3>Thirty Day Returns: {financial(crypto['30d']?.price_change_pct * 100)}% </h3> 
