@@ -15,8 +15,8 @@ function UserInfo() {
     <NavLink to={{pathname: `/ledger`}}>
         <p>View Ledger</p> 
       </NavLink>
-
-    <p>Change password, change username, delete user (add these methods to auth object)</p>
+<p>GG</p>
+    <button onClick={() => auth.deleteUser()}>Delete Account</button>
     <p>Remove hold goals</p>
     </>
   );
