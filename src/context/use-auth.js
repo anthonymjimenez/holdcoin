@@ -34,13 +34,12 @@ function useProvideAuth() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        Accept: "application/json"
       },
       body: JSON.stringify({ user: state }),
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         
         setAuth(true)
 
@@ -51,9 +50,27 @@ function useProvideAuth() {
   };
 
   const updateBalance = (data) => {
-    console.log(data)
     setUser((user) => { return {...user, balance: user.balance - (data.transaction.total_price) }})
     }
+
+  const increaseBalance = (state) => {
+    fetch(`http://localhost:3000/api/v1/users/${user.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`
+      },
+      body: JSON.stringify({user: state})
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        // console.log(data)
+        setUser(data.user)
+      })
+      .catch(console.error);
+
+  }
 
   const signup = (state) => {
     fetch(`http://localhost:3000/api/v1/users`, {
@@ -84,7 +101,6 @@ function useProvideAuth() {
       });
       let data = await resp.json();
       setAuth(true)
-      console.log(data)
       setUser(await data)
       return true
     }
@@ -122,6 +138,7 @@ function useProvideAuth() {
     signup,
     signout,
     signInFromToken,
-    updateBalance
+    updateBalance,
+    increaseBalance
   };
 }
