@@ -9,6 +9,7 @@ function UserInfo() {
     <>
     <h2>User Info</h2>
     <h3>Username: {user.username}</h3>
+    <h3>Age: {user.age}</h3>
     <h3></h3>
     <p>whoami(Adding this info should be easy with the useAuth hook)</p>
     <NavLink to={{pathname: `/ledger`}}>

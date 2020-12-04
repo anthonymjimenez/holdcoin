@@ -91,7 +91,7 @@ function useProvideAuth() {
     return false
   };
 
-  const updateUserName = async (newUserObject) => {
+  const updateUser = async (newUserObject) => {
     const token = localStorage.getItem("token"); // set user with token if(token & user=dne) <- that means token was set and page has been reset, in that case use token to fetch user
       let resp = await fetch(`http://localhost:3000/api/v1/users/`, {
         headers: {
@@ -104,7 +104,11 @@ function useProvideAuth() {
       setUser(await data)
     
   };
+  const updateCryptos = (data) => {
+    console.log(data)
+    // setUser((user) => { return {...user, cryptos: data.cryptos }})
 
+  }
   const deleteUser = async () => {
     // { ... }
   }
