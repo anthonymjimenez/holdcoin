@@ -34,13 +34,12 @@ function useProvideAuth() {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        Accept: "application/json"
       },
       body: JSON.stringify({ user: state }),
     })
       .then((r) => r.json())
       .then((data) => {
-        console.log(data);
         
         setAuth(true)
 
@@ -51,9 +50,9 @@ function useProvideAuth() {
   };
 
   const updateBalance = (data) => {
-    console.log(data)
     setUser((user) => { return {...user, balance: user.balance - (data.transaction.total_price) }})
     }
+
     const updateCryptos = (data) => {
       setUser((user) => { return {...user, cryptos: data.cryptos }})
   
@@ -88,7 +87,6 @@ function useProvideAuth() {
       });
       let data = await resp.json();
       setAuth(true)
-      console.log(data)
       setUser(await data)
       return true
     }

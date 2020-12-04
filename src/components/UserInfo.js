@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useAuth } from '../context/use-auth';
 
 function UserInfo() {
-  let auth = useAuth()
+  const auth = useAuth()
   let user = auth.user
   return (
     <>
