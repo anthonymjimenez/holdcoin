@@ -11,7 +11,6 @@ function Blockfolio() {
   let [userData, setUserData] = useState(uniqueCryptos);
   useEffect(() => {
     // will need to make some sort of component did mount call
-    console.log(auth.user);
     if (auth.user.cryptos) {
       let uniqueCryptos = getUnique(auth.user.cryptos);
       Promise.all(uniqueCryptos.map(appendCryptoInfo)).then(setUserData);

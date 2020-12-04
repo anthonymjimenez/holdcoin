@@ -11,7 +11,6 @@ const BlockLinkContainer = ({ cryptos}) => {
   ;
   return (
     <div>
-      {console.log(averageCost(auth.user, cryptos[1]))}
 
       {renderLinks()}
     </div>

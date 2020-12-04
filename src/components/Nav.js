@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import {financial} from "../utils/utils";
 
 function Nav({user}) {
+
   
   return (
     <nav>
@@ -15,7 +16,7 @@ function Nav({user}) {
           </li>
           { user &&
           <li>
-            Username: {user.username}
+            <Link to ='/userinfo'>Username: {user.username}</Link>
           </li>}
           { user && 
           <li>
@@ -28,3 +29,4 @@ function Nav({user}) {
 }
 
 export default Nav;
+

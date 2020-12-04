@@ -5,7 +5,6 @@ import { getUnique } from "../utils/utils";
 import { useAuth } from "../context/use-auth";
 
 function UserContainer({cryptos}) {
-  console.log(cryptos)
   return (
     <>
       <h3> Your Cryptos </h3>

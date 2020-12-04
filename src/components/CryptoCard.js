@@ -4,6 +4,13 @@ import { showurl, isoId, owned, financial, find, totalSizePerCrypto, totalSpendP
 import { useLocation } from "react-router-dom";
 import TransactionForm from "./TransactionForm";
 
+import { Row, Col } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "../utils/css/animate.min.css";
+import "../utils/sass/light-bootstrap-dashboard-react.scss?v=1.3.0";
+import "../utils/css/demo.css";
+import "../utils/css/pe-icon-7-stroke.css";
+
 function CryptoCard(props) {
   const auth = useAuth();
   const [crypto, setCrypto] = useState({});
@@ -19,7 +26,7 @@ function CryptoCard(props) {
       // need to make fetch to userinfo and append
       setCrypto(data[0]);
       setUserData(find(crypto, auth.user))
-     })()
+    })()
     const interval = setInterval(async () => {
       let id = isoId(location.pathname);
       let resp = await fetch(`${showurl}${id}`);
@@ -33,12 +40,35 @@ function CryptoCard(props) {
 
   return (
     <>
-      <img
-        src={crypto?.logo_url}
-        alt={crypto?.symbol + "logo"}
-        width="300"
-        height="300"
-      />
+      <div className="card card-stats">
+        <div className="content">
+          <Row>
+            <Col xs={5}>
+              <div className="icon-big text-center icon-warning">
+                <img
+                  src={crypto?.logo_url}
+                  alt={crypto?.symbol + "logo"}
+                  width="300"
+                  height="300"
+                />
+              </div>
+            </Col>
+            <Col xs={7}>
+              <div className="numbers">
+                {/* <p>{this.props.statsText}</p> */}
+                {/* {this.props.statsValue} */}
+              </div>
+            </Col>
+          </Row>
+          <div className="footer">
+            <hr />
+            <div className="stats">
+              {/* {this.props.statsIcon} {this.props.statsIconText} */}
+            </div>
+          </div>
+        </div>
+      </div>
+      
       <h3>{crypto.name}({crypto.symbol})</h3>
       <h3>Current Price: {financial(crypto.price)}</h3>
       <h3>All-Time High: ${financial(crypto.high)} was set on {crypto.high_timestamp?.split('T')[0]}</h3>
@@ -46,7 +76,6 @@ function CryptoCard(props) {
       <h3>Thirty Day Returns: {financial(crypto['30d']?.price_change_pct * 100)}% </h3> 
 
       <h3>Market Cap: ${crypto.market_cap}</h3>
-      {console.log(crypto)}
 
       {owned(crypto, auth.user) ? (
         <>

@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { financial } from '../utils/utils'
 
 function BlockLink({crypto, averageCost, size}) {
-console.log(averageCost, size)
+
   return (
     <>
     <NavLink to={{pathname: `/cryptos/${crypto.symbol}`}}>

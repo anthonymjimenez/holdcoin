@@ -51,7 +51,7 @@ function useProvideAuth() {
   };
 
   const updateBalance = (data) => {
-    console.log(data)
+    // console.log(data)
     setUser((user) => { return {...user, balance: user.balance - (data.transaction.total_price) }})
     }
 
@@ -84,7 +84,7 @@ function useProvideAuth() {
       });
       let data = await resp.json();
       setAuth(true)
-      console.log(data)
+      // console.log(data)
       setUser(await data)
       return true
     }
