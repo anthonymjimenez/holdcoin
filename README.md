@@ -4,5 +4,4 @@
 
  holdcoin isn't a crypto, it's the new way to buy crypto smarter. See how holdcoin can maximize your profits today!
 
- “Your money is like soap. The more you handle it the less you will have.” - Gene Fama Jr's
-
+ “Your money is like soap. The more you handle it the less you will have.” - Eugene Fama 
